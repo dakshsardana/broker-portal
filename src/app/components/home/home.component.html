@@ -1,44 +1,59 @@
 <div class="home-container">
     <!-- Navbar -->
     <nav class="navbar" [class.scrolled]="isScrolled">
-        <h1 class="logo">Broker Portal</h1>
-        <a routerLink="./login" class="login-btn">Login</a>
+      <h1 class="logo">CyberScape</h1>
+      <div class="nav-links">
+        <a routerLink="/" class="nav-item">Home</a>
+        <a routerLink="/about" class="nav-item">About Us</a>
+        <a routerLink="/contact" class="nav-item">Contact</a>
+        <a routerLink="/login" class="login-btn">Login</a>
+      </div>
     </nav>
-
+  
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Secure Your Future with Cyber Insurance</h1>
-            <p>Your trusted platform for managing cyber insurance efficiently.</p>
-            <a routerLink="./quote" class="quote-btn">Get a Quote</a>
-        </div>
+      <div class="hero-content">
+        <h1>Secure Your Future with Cyber Insurance</h1>
+        <p>Your trusted platform for managing cyber insurance efficiently.</p>
+        <a routerLink="/quote" class="quote-btn">Get a Quote</a>
+      </div>
     </section>
-
+  
     <!-- Features Section -->
     <section class="features">
-        <h2>Our Features</h2>
-        <div class="feature-list">
-            <div class="feature-card">🔒 Secure Transactions</div>
-            <div class="feature-card">📊 Real-time Analytics</div>
-            <div class="feature-card">⚡ Easy Claims Processing</div>
+      <h2>Our Features</h2>
+      <div class="feature-list">
+        <div class="feature-card">
+          <span>🔒</span>
+          <h3>Secure Transactions</h3>
         </div>
+        <div class="feature-card">
+          <span>📊</span>
+          <h3>Real-time Analytics</h3>
+        </div>
+        <div class="feature-card">
+          <span>⚡</span>
+          <h3>Easy Claims Processing</h3>
+        </div>
+      </div>
     </section>
-
+  
     <!-- Contact Form Section -->
     <section class="contact" id="contact-form">
-        <h2>Contact Us</h2>
-        <p>Have questions? Reach out to us.</p>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-
-            <label for="message">Message:</label>
-            <textarea id="message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
+      <h2>Contact Us</h2>
+      <p>Have questions? Reach out to us.</p>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+  
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" required />
+  
+        <label for="message">Message:</label>
+        <textarea id="message" rows="4" placeholder="Write your message" required></textarea>
+  
+        <button type="submit">Submit</button>
+      </form>
     </section>
-</div>
+  </div>
+  

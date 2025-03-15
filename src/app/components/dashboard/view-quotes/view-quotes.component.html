@@ -1,0 +1,18 @@
+<div class="quotes-container">
+    <h3>Generated Quotes</h3>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Coverage</th>
+            <th>Premium</th>
+        </tr>
+        <tr *ngFor="let quote of quotes">
+            <td>{{ quote.fullName }}</td>
+            <td>{{ quote.email }}</td>
+            <td>{{ quote.coverageAmount }}</td>
+            <td>{{ quote.premium }}</td>
+        </tr>
+    </table>
+</div>

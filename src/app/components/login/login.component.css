@@ -1,36 +1,129 @@
-.login-container {
+/* General Styling */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.6;
+    color: #333; /* Standard Text Color */
+    background: linear-gradient(to right, rgba(0, 43, 92, 0.8), rgba(0, 80, 158, 0.8));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Auth Container */
+.auth-container {
     width: 100%;
     max-width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
     text-align: center;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  input {
-    padding: 10px;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Headings */
+h2 {
+    font-size: 24px;
+    color: rgb(0, 0, 0);
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button {
-    padding: 10px;
-    background: #007bff;
-    color: white;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Placeholder Styling */
+input::placeholder {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Focus Effect */
+input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #00bcd4; /* Accent Color */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Button Hover Effect */
+button:hover {
+    transform: scale(1.05);
+    background-color: #0192a8;
+    box-shadow: 0px 6px 20px rgba(0, 188, 212, 0.5);
+}
+
+/* Toggle Text */
+.toggle-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+}
+
+.toggle-text a {
+    color: #00bcd4;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.toggle-text a:hover {
+    text-decoration: underline;
+}
+
+/* Smooth form fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-container {
+        width: 90%;
+        padding: 20px;
+    }
+}

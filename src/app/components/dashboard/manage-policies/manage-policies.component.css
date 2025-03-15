@@ -1,0 +1,106 @@
+/* Policies Container */
+.policies-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Title */
+.policies-container h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #004aad; /* Primary Theme Color */
+    margin-bottom: 15px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table Header */
+th {
+    background: #004aad;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Table Rows */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternate Row Coloring */
+tr:nth-child(even) {
+    background: #f1f1f1;
+}
+
+/* Table Hover Effect */
+tr:hover {
+    background: rgba(0, 74, 173, 0.1);
+}
+
+/* Buttons */
+button {
+    padding: 8px 12px;
+    margin: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Renew Button */
+button:nth-child(1) {
+    background: #28a745; /* Green */
+    color: white;
+}
+
+button:nth-child(1):hover {
+    background: #218838;
+}
+
+/* Cancel Button */
+button:nth-child(2) {
+    background: #dc3545; /* Red */
+    color: white;
+}
+
+button:nth-child(2):hover {
+    background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .policies-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}

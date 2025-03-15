@@ -1,0 +1,16 @@
+<div class="profile-container">
+    <h3>Broker Profile</h3>
+
+    <!-- Profile Photo -->
+    <div class="profile-photo">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Broker Photo">
+    </div>
+
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="profile.name">
+
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="profile.email">
+
+    <button (click)="updateProfile()">Update</button>
+</div>

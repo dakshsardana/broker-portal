@@ -1,0 +1,19 @@
+<div class="policies-container">
+    <h3>Manage Policies</h3>
+
+    <table>
+        <tr>
+            <th>Policy ID</th>
+            <th>Customer</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let policy of policies">
+            <td>{{ policy.id }}</td>
+            <td>{{ policy.customer }}</td>
+            <td>
+                <button (click)="renewPolicy(policy.id)">Renew</button>
+                <button (click)="cancelPolicy(policy.id)">Cancel</button>
+            </td>
+        </tr>
+    </table>
+</div>
