@@ -1,115 +1,232 @@
-/* Dashboard Container */
-.dashboard-container {
-    width: 100%;
-    height: 100vh;
-    background: #f5f5f5;
+/* Modern Dashboard Styles */
+:host {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4895ef;
+    --danger-color: #f72585;
+    --success-color: #4cc9f0;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --gray-color: #6c757d;
+    --sidebar-width: 240px;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    width: var(--sidebar-width);
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    z-index: 10;
+  }
+  
+  .sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .logo {
+    display: flex;
     align-items: center;
-    padding-top: 70px; /* Adjusted for fixed navbar */
-}
-
-/* Navbar */
-.navbar {
+    gap: 0.75rem;
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .logo-icon {
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .sidebar-nav {
+    flex: 1;
+    padding: 1rem 0;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-links li a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    color: var(--gray-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .nav-links li a:hover {
+    background-color: rgba(67, 97, 238, 0.05);
+    color: var(--primary-color);
+  }
+  
+  .nav-links li a.active {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+  }
+  
+  .nav-links li a mat-icon {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     width: 100%;
-    background: #222; /* Darker shade for better contrast */
-    color: white;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    color: var(--gray-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+  
+  .logout-btn:hover {
+    background-color: rgba(247, 37, 133, 0.1);
+    color: var(--danger-color);
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  
+  .content-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed; /* ✅ Fixed at the top */
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensures it stays above other elements */
-    padding: 15px 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Logo */
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* Navbar Links */
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li {
-    display: inline;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all 0.3s ease-in-out;
-    padding: 8px 12px;
-    border-radius: 5px;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    background: rgba(255, 204, 0, 0.8);
-    color: #222;
-}
-
-/* Logout Button */
-.logout-btn {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: background 0.3s ease-in-out;
-}
-
-.logout-btn:hover {
-    background: #cc0000;
-    transform: scale(1.05);
-}
-
-/* Dashboard Content */
-.dashboard-content {
-    width: 90%;
-    margin-top: 20px;
-    padding: 25px;
+    padding: 1.5rem;
     background: white;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    transition: 0.3s ease-in-out;
-}
-
-/* Responsive Navbar */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .logout-btn {
-        margin-top: 10px;
-    }
-
-    .dashboard-content {
-        width: 95%;
-    }
-}
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .page-title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .welcome-msg {
+    color: var(--gray-color);
+    font-size: 0.875rem;
+  }
+  
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(67, 97, 238, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+  }
+  
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .stat-icon.blue {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+  }
+  
+  .stat-icon.orange {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+  }
+  
+  .stat-icon.red {
+    background-color: rgba(247, 37, 133, 0.1);
+    color: var(--danger-color);
+  }
+  
+  .stat-icon.green {
+    background-color: rgba(76, 201, 240, 0.1);
+    color: var(--success-color);
+  }
+  
+  .stat-icon mat-icon {
+    font-size: 1.5rem;
+  }
+  
+  .stat-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+  }
+  
+  .stat-info p {
+    margin: 0.25rem 0 0;
+    color: var(--gray-color);
+    font-size: 0.875rem;
+  }
+  
+  /* Router Container */
+  .router-container {
+    flex: 1;
+    padding: 0 1.5rem 1.5rem;
+    background-color: #f5f7fa;
+  }

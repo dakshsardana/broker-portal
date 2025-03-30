@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms'; // ✅ Import FormsModule
 })
 export class BrokerProfileComponent {
   profile = {
-    name: 'John Doe',
+    name: 'Registered Broker Name', // Replace with the actual registered name
     email: 'broker@example.com'
   };
 

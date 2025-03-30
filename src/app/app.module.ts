@@ -13,6 +13,7 @@ import { ViewQuotesComponent } from './components/dashboard/view-quotes/view-quo
 import { ManagePoliciesComponent } from './components/dashboard/manage-policies/manage-policies.component';
 import { BrokerProfileComponent } from './components/dashboard/broker-profile/broker-profile.component';
 
+
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(

@@ -1,95 +1,207 @@
-<h1 class="form-title">Cyber Insurance Quote</h1>
-
-<form [formGroup]="form" class="quote-form">
-    <!-- Company Details -->
-    <div *ngIf="currentStep === 0" formGroupName="companyDetails">
-        <h3>Company Details</h3>
-        <label>Company Name:</label>
-        <input type="text" formControlName="companyName">
-        <p class="error" *ngIf="form.get('companyDetails.companyName')?.invalid && form.get('companyDetails.companyName')?.touched">
-            Company name is required.
-        </p>
-
-        <label>Company Address:</label>
-        <input type="text" formControlName="companyAddress">
-        <p class="error" *ngIf="form.get('companyDetails.companyAddress')?.invalid && form.get('companyDetails.companyAddress')?.touched">
-            Address is required.
-        </p>
-
-        <label>Business Type:</label>
-        <input type="text" formControlName="businessType">
-        <p class="error" *ngIf="form.get('companyDetails.businessType')?.invalid && form.get('companyDetails.businessType')?.touched">
-            Business type is required.
-        </p>
-
-        <label>No. of Employees:</label>
-        <input type="number" formControlName="numEmployees">
-        <p class="error" *ngIf="form.get('companyDetails.numEmployees')?.invalid && form.get('companyDetails.numEmployees')?.touched">
-            Enter a valid number.
-        </p>
+<div class="quote-container">
+    <div class="quote-card">
+      <h1 class="form-title">
+        <mat-icon class="title-icon">security</mat-icon>
+        Cyber Insurance Quote
+      </h1>
+  
+      <div class="progress-bar">
+        <div class="progress-step" *ngFor="let step of steps; let i = index" 
+             [class.active]="i === currentStep" 
+             [class.completed]="i < currentStep">
+          <div class="step-number">{{ i + 1 }}</div>
+          <div class="step-label">{{ step | titlecase }}</div>
+        </div>
+      </div>
+  
+      <form [formGroup]="form" class="quote-form">
+        <!-- Company Details -->
+        <div *ngIf="currentStep === 0" formGroupName="companyDetails" class="form-section">
+          <h3 class="section-title">
+            <mat-icon>business</mat-icon>
+            Company Details
+          </h3>
+          
+          <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" formControlName="companyName" placeholder="Enter company name">
+            <p class="error" *ngIf="form.get('companyDetails.companyName')?.invalid && form.get('companyDetails.companyName')?.touched">
+              <mat-icon>error</mat-icon> Company name is required
+            </p>
+          </div>
+  
+          <div class="form-row">
+            <div class="form-group">
+              <label>Business Type</label>
+              <input type="text" formControlName="businessType" placeholder="e.g. Financial Services">
+              <p class="error" *ngIf="form.get('companyDetails.businessType')?.invalid && form.get('companyDetails.businessType')?.touched">
+                <mat-icon>error</mat-icon> Business type is required
+              </p>
+            </div>
+            
+            <div class="form-group">
+              <label>No. of Employees</label>
+              <input type="number" formControlName="numEmployees" placeholder="0">
+              <p class="error" *ngIf="form.get('companyDetails.numEmployees')?.invalid && form.get('companyDetails.numEmployees')?.touched">
+                <mat-icon>error</mat-icon> Enter a valid number
+              </p>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label>Company Address</label>
+            <input type="text" formControlName="companyAddress" placeholder="Street, City, Country">
+            <p class="error" *ngIf="form.get('companyDetails.companyAddress')?.invalid && form.get('companyDetails.companyAddress')?.touched">
+              <mat-icon>error</mat-icon> Address is required
+            </p>
+          </div>
+        </div>
+  
+        <!-- Cybersecurity Details -->
+        <div *ngIf="currentStep === 1" formGroupName="cyberSecurity" class="form-section">
+          <h3 class="section-title">
+            <mat-icon>shield</mat-icon>
+            Cybersecurity Details
+          </h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Firewall Protection</label>
+              <mat-radio-group formControlName="firewall" class="radio-group">
+                <mat-radio-button value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            
+            <div class="form-group">
+              <label>Encryption Used</label>
+              <mat-form-field appearance="outline">
+                <input matInput formControlName="encryption" placeholder="e.g. AES-256">
+              </mat-form-field>
+              <p class="error" *ngIf="form.get('cyberSecurity.encryption')?.invalid && form.get('cyberSecurity.encryption')?.touched">
+                <mat-icon>error</mat-icon> Encryption method is required
+              </p>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label>Data Backup Policy</label>
+            <mat-form-field appearance="outline">
+              <textarea matInput formControlName="dataBackup" placeholder="Describe your backup policy"></textarea>
+            </mat-form-field>
+            <p class="error" *ngIf="form.get('cyberSecurity.dataBackup')?.invalid && form.get('cyberSecurity.dataBackup')?.touched">
+              <mat-icon>error</mat-icon> Backup policy is required
+            </p>
+          </div>
+        </div>
+  
+        <!-- Claims History -->
+        <div *ngIf="currentStep === 2" formGroupName="claimsHistory" class="form-section">
+          <h3 class="section-title">
+            <mat-icon>history</mat-icon>
+            Claims History
+          </h3>
+          
+          <div class="form-group">
+            <label>Past Cyber Attacks (Last 5 Years)</label>
+            <mat-form-field appearance="outline">
+              <textarea matInput formControlName="pastAttacks" placeholder="Describe any past incidents"></textarea>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-group">
+            <label>Financial Loss (in USD)</label>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" formControlName="financialLoss" placeholder="0">
+              <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+            <p class="error" *ngIf="form.get('claimsHistory.financialLoss')?.invalid && form.get('claimsHistory.financialLoss')?.touched">
+              <mat-icon>error</mat-icon> Enter a valid amount
+            </p>
+          </div>
+        </div>
+  
+        <!-- Insurance Coverage -->
+        <div *ngIf="currentStep === 3" formGroupName="coverage" class="form-section">
+          <h3 class="section-title">
+            <mat-icon>attach_money</mat-icon>
+            Insurance Coverage
+          </h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Desired Coverage Amount</label>
+              <mat-form-field appearance="outline">
+                <input matInput type="number" formControlName="coverageAmount" placeholder="1000000">
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+              <p class="error" *ngIf="form.get('coverage.coverageAmount')?.invalid && form.get('coverage.coverageAmount')?.touched">
+                <mat-icon>error</mat-icon> Coverage amount is required
+              </p>
+            </div>
+            
+            <div class="form-group">
+              <label>Deductible Amount</label>
+              <mat-form-field appearance="outline">
+                <input matInput type="number" formControlName="deductible" placeholder="1000">
+                <span matPrefix>$&nbsp;</span>
+              </mat-form-field>
+              <p class="error" *ngIf="form.get('coverage.deductible')?.invalid && form.get('coverage.deductible')?.touched">
+                <mat-icon>error</mat-icon> Deductible amount is required
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Navigation Buttons -->
+        <div class="button-container">
+          <button mat-stroked-button type="button" (click)="goPrevious()" [disabled]="currentStep === 0">
+            <mat-icon>arrow_back</mat-icon> Previous
+          </button>
+          
+          <button mat-raised-button color="primary" type="button" *ngIf="currentStep < steps.length - 1" 
+                  (click)="goNext()" [disabled]="!isStepValid()">
+            Next <mat-icon>arrow_forward</mat-icon>
+          </button>
+          
+          <button mat-raised-button color="accent" type="button" *ngIf="currentStep === steps.length - 1" 
+                  (click)="onSubmit()" [disabled]="!form.valid">
+            <mat-icon>check_circle</mat-icon> Submit Quote
+          </button>
+        </div>
+      </form>
     </div>
-
-    <!-- Cybersecurity Details -->
-    <div *ngIf="currentStep === 1" formGroupName="cyberSecurity">
-        <h3>Cybersecurity Details</h3>
-        <label>Do you use a firewall?</label>
-        <select formControlName="firewall">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
-
-        <label>Encryption Used:</label>
-        <input type="text" formControlName="encryption">
-        <p class="error" *ngIf="form.get('cyberSecurity.encryption')?.invalid && form.get('cyberSecurity.encryption')?.touched">
-            Encryption method is required.
-        </p>
-
-        <label>Data Backup Policy:</label>
-        <input type="text" formControlName="dataBackup">
-        <p class="error" *ngIf="form.get('cyberSecurity.dataBackup')?.invalid && form.get('cyberSecurity.dataBackup')?.touched">
-            Backup policy is required.
-        </p>
+  
+    <!-- Quote Preview -->
+    <div class="quote-preview" *ngIf="premium !== null">
+      <div class="preview-card">
+        <h2>
+          <mat-icon>verified</mat-icon>
+          Your Cyber Insurance Quote
+        </h2>
+        
+        <div class="preview-details">
+          <div class="preview-row">
+            <span>Estimated Premium:</span>
+            <strong>${{ premium | number }}</strong>
+          </div>
+          <div class="preview-row">
+            <span>Coverage Amount:</span>
+            <strong>${{ form.value.coverage?.coverageAmount | number }}</strong>
+          </div>
+          <div class="preview-row">
+            <span>Deductible:</span>
+            <strong>${{ form.value.coverage?.deductible | number }}</strong>
+          </div>
+        </div>
+        
+        <button mat-raised-button color="primary" class="action-button">
+          <mat-icon>description</mat-icon> Download Full Proposal
+        </button>
+        
+        <button mat-stroked-button color="primary" class="action-button">
+          <mat-icon>headset_mic</mat-icon> Speak to an Agent
+        </button>
+      </div>
     </div>
-
-    <!-- Claims History -->
-    <div *ngIf="currentStep === 2" formGroupName="claimsHistory">
-        <h3>Claims History</h3>
-        <label>Past Cyber Attacks:</label>
-        <input type="text" formControlName="pastAttacks">
-
-        <label>Financial Loss (in USD):</label>
-        <input type="number" formControlName="financialLoss">
-        <p class="error" *ngIf="form.get('claimsHistory.financialLoss')?.invalid && form.get('claimsHistory.financialLoss')?.touched">
-            Enter a valid amount.
-        </p>
-    </div>
-
-    <!-- Insurance Coverage -->
-    <div *ngIf="currentStep === 3" formGroupName="coverage">
-        <h3>Insurance Coverage</h3>
-        <label>Desired Coverage Amount:</label>
-        <input type="number" formControlName="coverageAmount">
-        <p class="error" *ngIf="form.get('coverage.coverageAmount')?.invalid && form.get('coverage.coverageAmount')?.touched">
-            Coverage amount is required.
-        </p>
-
-        <label>Deductible Amount:</label>
-        <input type="number" formControlName="deductible">
-        <p class="error" *ngIf="form.get('coverage.deductible')?.invalid && form.get('coverage.deductible')?.touched">
-            Deductible amount is required.
-        </p>
-    </div>
-
-    <!-- Navigation Buttons -->
-    <div class="button-container">
-        <button type="button" (click)="goPrevious()" [disabled]="currentStep === 0">Previous</button>
-        <button type="button" *ngIf="currentStep < steps.length - 1" (click)="goNext()" [disabled]="!isStepValid()">Next</button>
-        <button type="button" *ngIf="currentStep === steps.length - 1" (click)="onSubmit()" [disabled]="!form.valid">Submit</button>
-    </div>
-
-    <!-- Quote Details -->
-    <div *ngIf="premium !== null">
-        <h2>Calculated Premium</h2>
-        <p>Your estimated premium is: <strong>{{ premium }}</strong></p>
-    </div>
-</form>
+  </div>

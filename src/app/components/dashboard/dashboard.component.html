@@ -1,18 +1,78 @@
 <div class="dashboard-container">
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <h2 class="logo">Dashboard</h2>
+    <!-- Modern Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">
+          <mat-icon class="logo-icon">account_balance</mat-icon>
+          <span>CyberSheild</span>
+        </h2>
+      </div>
+  
+      <nav class="sidebar-nav">
         <ul class="nav-links">
-            <li><a routerLink="get-quote" routerLinkActive="active">Get a Quote</a></li>
-            <li><a routerLink="view-quotes" routerLinkActive="active">View Quotes</a></li>
-            <li><a routerLink="manage-policies" routerLinkActive="active">Manage Policies</a></li>
-            <li><a routerLink="profile" routerLinkActive="active">Profile</a></li>
+          <li>
+            <a routerLink="get-quote" routerLinkActive="active">
+              <mat-icon>request_quote</mat-icon>
+              <span>Get a Quote</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="view-quotes" routerLinkActive="active">
+              <mat-icon>list_alt</mat-icon>
+              <span>View Quotes</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="manage-policies" routerLinkActive="active">
+              <mat-icon>assignment</mat-icon>
+              <span>Manage Policies</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="profile" routerLinkActive="active">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </a>
+          </li>
         </ul>
-        <button class="logout-btn" (click)="logout()">Logout</button>
-    </nav>
-
-    <!-- Render Child Components -->
-    <div class="dashboard-content">
+      </nav>
+  
+      <div class="sidebar-footer">
+        <button class="logout-btn" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+  
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="content-header">
+        <h1 class="page-title">{{ currentPageTitle }}</h1>
+        <div class="user-info">
+          <span class="welcome-msg">Welcome, {{ userName }}</span>
+          <div class="avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+        </div>
+      </header>
+  
+      <!-- Dashboard Stats Cards -->
+      <div class="stats-grid" *ngIf="showStats">
+        <div class="stat-card" *ngFor="let stat of quickStats">
+          <div class="stat-icon" [ngClass]="stat.color">
+            <mat-icon>{{ stat.icon }}</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3>{{ stat.value }}</h3>
+            <p>{{ stat.label }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Router Outlet for Lazy-Loaded Content -->
+      <div class="router-container">
         <router-outlet></router-outlet>
-    </div>
-</div>
+      </div>
+    </main>
+  </div>

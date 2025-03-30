@@ -2,13 +2,26 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-get-quote',
   standalone: true,
   templateUrl: './get-quote.component.html',
   styleUrls: ['./get-quote.component.css'],
-  imports: [CommonModule, ReactiveFormsModule] // ✅ Import ReactiveFormsModule here
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule
+  ]
 })
 export class GetQuoteComponent {
   currentStep = 0;
@@ -32,19 +45,21 @@ export class GetQuoteComponent {
       financialLoss: new FormControl('', Validators.min(0)),
     }),
     coverage: new FormGroup({
-      coverageAmount: new FormControl('', Validators.required),
-      deductible: new FormControl('', Validators.required),
+      coverageAmount: new FormControl('', [Validators.required, Validators.min(10000)]),
+      deductible: new FormControl('', [Validators.required, Validators.min(500)]),
     })
   });
 
   goNext() {
     if (this.isStepValid()) {
       this.currentStep++;
+      window.scrollTo(0, 0);
     }
   }
 
   goPrevious() {
     this.currentStep--;
+    window.scrollTo(0, 0);
   }
 
   isStepValid(): boolean {
@@ -54,8 +69,20 @@ export class GetQuoteComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.premium = Math.floor(Math.random() * 5000) + 1000; // Dummy premium calculation
-      alert('Form submitted successfully!');
+      // More realistic premium calculation based on form values
+      const basePremium = 1000;
+      const employees = Number(this.form.value.companyDetails?.numEmployees) || 1;
+      const coverage = Number(this.form.value.coverage?.coverageAmount) || 1000000;
+      const deductible = Number(this.form.value.coverage?.deductible) || 1000;
+      const firewall = this.form.value.cyberSecurity?.firewall === 'yes' ? 0.9 : 1.2;
+      
+      this.premium = Math.round(
+        basePremium * 
+        (employees / 50) * 
+        (coverage / 1000000) * 
+        (10000 / deductible) * 
+        firewall
+      );
     }
   }
 }

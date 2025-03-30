@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http'; // ✅ Import HttpClien
 import { AppComponent } from './app/app.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { LoginComponent } from './app/components/login/login.component';
-import { QuoteComponent } from './app/components/quote/quote.component';
 import { DashboardComponent } from './app/components/dashboard/dashboard.component';
 import { GetQuoteComponent } from './app/components/dashboard/get-quote/get-quote.component';
 import { ViewQuotesComponent } from './app/components/dashboard/view-quotes/view-quotes.component';
@@ -20,7 +19,6 @@ bootstrapApplication(AppComponent, {
     provideRouter([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'quote', component: QuoteComponent },
       { 
         path: 'dashboard', component: DashboardComponent, 
         children: [
