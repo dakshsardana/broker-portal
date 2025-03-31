@@ -9,13 +9,14 @@ import {
   faEnvelope,
   faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [RouterModule],
+  imports: [RouterModule, FontAwesomeModule],
 })
 export class HomeComponent implements OnInit {
   isScrolled = false;
@@ -29,7 +30,10 @@ export class HomeComponent implements OnInit {
     bolt: faBolt,
     phone: faPhone,
     email: faEnvelope,
-    marker: faMapMarkerAlt
+    marker: faMapMarkerAlt,
+    twitter: faTwitter,
+    linkedin: faLinkedin,
+    facebook: faFacebook
   };
 
   ngOnInit() {
@@ -43,9 +47,22 @@ export class HomeComponent implements OnInit {
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    if (this.isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }
 
   closeMobileMenu() {
     this.isMobileMenuOpen = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }
