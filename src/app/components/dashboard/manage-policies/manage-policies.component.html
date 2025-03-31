@@ -1,19 +1,140 @@
-<div class="policies-container">
-    <h3>Manage Policies</h3>
-
-    <table>
-        <tr>
+<div class="policy-management-container">
+    <div class="header">
+      <h2>Policy Management</h2>
+      <button class="add-policy-btn" (click)="openAddPolicyModal()">
+        <i class="fas fa-plus"></i> Add New Policy
+      </button>
+    </div>
+  
+    <div class="filters">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" [(ngModel)]="searchText" placeholder="Search policies..." (input)="filterPolicies()">
+      </div>
+      <div class="status-filter">
+        <label>Filter by Status:</label>
+        <select [(ngModel)]="selectedStatus" (change)="filterPolicies()">
+          <option value="all">All Statuses</option>
+          <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="policies-table-container">
+      <table class="policies-table">
+        <thead>
+          <tr>
             <th>Policy ID</th>
             <th>Customer</th>
+            <th>Type</th>
+            <th>Premium</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
             <th>Actions</th>
-        </tr>
-        <tr *ngFor="let policy of policies">
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let policy of filteredPolicies">
             <td>{{ policy.id }}</td>
-            <td>{{ policy.customer }}</td>
+            <td>{{ policy.customerName }}</td>
+            <td>{{ policy.type }}</td>
+            <td>{{ policy.premium | currency }}</td>
+            <td>{{ policy.startDate | date }}</td>
+            <td>{{ policy.endDate | date }}</td>
             <td>
-                <button (click)="renewPolicy(policy.id)">Renew</button>
-                <button (click)="cancelPolicy(policy.id)">Cancel</button>
+              <span class="status-badge" [ngClass]="'status-' + policy.status">
+                {{ getStatusLabel(policy.status) }}
+              </span>
             </td>
-        </tr>
-    </table>
-</div>
+            <td class="actions">
+              <button class="edit-btn" (click)="openEditPolicyModal(policy)">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <div class="dropdown">
+                <button class="dropdown-toggle">
+                  <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <button (click)="renewPolicy(policy.id)">Renew</button>
+                  <button (click)="changePolicyStatus(policy.id, 'active')">Mark Active</button>
+                  <button (click)="changePolicyStatus(policy.id, 'expired')">Mark Expired</button>
+                  <button class="delete-btn" (click)="confirmDelete(policy.id)">Delete</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="filteredPolicies.length === 0">
+            <td colspan="8" class="no-results">No policies found matching your criteria</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Add/Edit Policy Modal -->
+    <div class="modal" *ngIf="showModal">
+      <div class="modal-content">
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+        <h3>{{ isEditing ? 'Edit Policy' : 'Add New Policy' }}</h3>
+        
+        <form (ngSubmit)="submitPolicyForm()">
+          <div class="form-group">
+            <label>Customer Name</label>
+            <input type="text" [(ngModel)]="currentPolicy.customerName" name="customerName" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Policy Type</label>
+              <select [(ngModel)]="currentPolicy.type" name="type" required>
+                <option value="cyber">Cyber Insurance</option>
+                <option value="liability">Liability</option>
+                <option value="property">Property</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Premium Amount</label>
+              <input type="number" [(ngModel)]="currentPolicy.premium" name="premium" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Start Date</label>
+              <input type="date" [(ngModel)]="currentPolicy.startDate" name="startDate" required>
+            </div>
+            
+            <div class="form-group">
+              <label>End Date</label>
+              <input type="date" [(ngModel)]="currentPolicy.endDate" name="endDate" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Status</label>
+            <select [(ngModel)]="currentPolicy.status" name="status" required>
+              <option *ngFor="let status of statusOptions" [value]="status.value">{{ status.label }}</option>
+            </select>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+            <button type="submit" class="submit-btn">{{ isEditing ? 'Update' : 'Add' }} Policy</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Delete Confirmation Modal -->
+    <div class="confirmation-modal" *ngIf="showDeleteConfirmation">
+      <div class="confirmation-content">
+        <h3>Confirm Deletion</h3>
+        <p>Are you sure you want to delete policy {{ policyToDelete }}? This action cannot be undone.</p>
+        <div class="confirmation-actions">
+          <button class="cancel-btn" (click)="showDeleteConfirmation = false">Cancel</button>
+          <button class="confirm-delete-btn" (click)="deletePolicy()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
